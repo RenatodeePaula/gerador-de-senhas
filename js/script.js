@@ -9,7 +9,6 @@ const getLetterLowerCase = () => {
 
 const getLetterUpperCase = () => {
     return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-
 };
 
 const getNumber = () => {
@@ -20,8 +19,35 @@ const getSYmbol = () => {
     const sylbols = "(){}[]=<>/,.!@#$%&*+-";
     return sylbols[Math.floor(Math.random() * sylbols.length)];
 };
-//===================== Eventos =====================
- 
+
+const generatePassword = (getLetterLowerCase, getLetterUpperCase, getNumber, getSYmbol) => {
+    let password = "";
+
+    const passwordLength = 10;
+
+    const generators = [
+        getLetterLowerCase,
+        getLetterUpperCase, 
+        getNumber,
+        getSYmbol
+    ];
+
+    for (let i = 0; i < passwordLength; i = i + generators.length) {
+        generators.forEach(() => {
+            const randomValue = generators[Math.floor(Math.random() * generators.length)]();
+            password += randomValue;
+        });
+    };
+        password = password = password.slice(0, passwordLength);
+        generatePasswordElement.style.display = "block";
+        generatePasswordElement.querySelector("h4").innerText = password;
+};
+//===================== Eventos ===================== 
 generatePasswordButton.addEventListener("click", () => {
-   console.log( getSYmbol());
+    generatePassword(
+        getLetterLowerCase,
+        getLetterUpperCase, 
+        getNumber,
+        getSYmbol
+    );    
 });
